@@ -2,8 +2,9 @@
 chcp 65001
 setlocal enabledelayedexpansion
 
-for /f "tokens=2*" %%a in ('reg query "HKCU\Control Panel\International" /v LocaleName 2^>nul ^| find "LocaleName"') do set "LocaleName=%%b"
-set "LangCode=!LocaleName:~0,2!"
+set "UILang="
+for /f "tokens=3" %%a in ('reg query "HKCU\Control Panel\Desktop" /v PreferredUILanguages 2^>nul ^| findstr /i "PreferredUILanguages"') do set "UILang=%%a"
+set "LangCode=!UILang:~0,2!"
 
 :input_version
 if /i "!LangCode!"=="zh" (
