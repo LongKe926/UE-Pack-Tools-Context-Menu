@@ -2,6 +2,9 @@
 chcp 65001
 setlocal enabledelayedexpansion
 
+for /f "tokens=2*" %%a in ('reg query "HKCU\Control Panel\International" /v LocaleName 2^>nul ^| find "LocaleName"') do set "LocaleName=%%b"
+set "LangCode=!LocaleName:~0,2!"
+
 :ask_aeskey
 if /i "!LangCode!"=="zh" (
     echo(是否有AES加密？^(y/n^):
