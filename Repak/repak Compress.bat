@@ -1,5 +1,4 @@
-setlocal enableextensions
-pushd "%~dp0"
-echo "%~1\*.*" > filelist.txt
-UnrealPak.exe "%~1.pak" -create=filelist.txt -compress
-popd
+@echo off
+setlocal enabledelayedexpansion
+
+%~dp0repak.exe pack %~1
